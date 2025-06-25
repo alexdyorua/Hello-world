@@ -18,7 +18,7 @@
         align-items: center;
         justify-content: center;
         font-family: 'Poppins', sans-serif;
-        background-color: DeepSkyBlue;
+        background-color: Navy;
         color: white;
         text-align: center;
         text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
@@ -85,20 +85,76 @@
           transform: translateY(0);
         }
       }
-    </style>
+    
+      #join-button {
+        display: none;
+        margin-top: 20px;
+        padding: 12px 24px;
+        font-size: 1rem;
+        font-weight: 600;
+        color: Navy;
+        background-color: white;
+        border: none;
+        border-radius: 8px;
+        text-decoration: none;
+        box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
+        transition: transform 0.3s ease, background-color 0.3s ease;
+        animation: fadeInUp 0.6s ease-out forwards;
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      #join-button:hover {
+        background-color: #f0f0f0;
+        transform: scale(1.05);
+      }
+
+
+      form label {
+        font-size: 2rem;
+        font-weight: 600;
+        animation: fadeInDown 1s ease-out;
+        display: block;
+      }
+
+      @keyframes fadeInDown {
+        from {
+          opacity: 0;
+          transform: translateY(-30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+</style>
   </head>
   <body>
     <main>
-      <form id="greet-form">
+	
+	<img src="images.jfif" alt="ICP Logo"
+     style="max-width: 160px; margin: 0 auto 20px; display: block; animation: fadeInDown 1s ease-out;" />
+      
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAABT0lEQVR4nO3WsQ2AMAxD0dP+/x0kXKcUBvlhTqJrj2zCQ7YwAAAAAAACAgLf3eGv6tpJquIgiCIJQuX73nXUMoqqqqGvB0AR5WbXZyXttqtqqj9bryZddKo+PKIoqqqqSCguPDUVUcXLq+q6mR8FVRxcuqoqjKIo7JzV5qYrq2qqrPKv7B+pqIq7LZ+oqtKuZz3Uv5q63pe+/zLKqqqpISV2cqiqqYvDqqjo/VVXFy6uq4nVVUcXLq+q6kpUVRRFFEUURRFsYAxzyKqzKlN+vK4AAAAASUVORK5CYII=" alt="ICP Logo"
+     style="width: 100px; margin: 0 auto 20px; display: block; animation: fadeInDown 1s ease-out;" />
+
+<form id="greet-form">
         <label for="name">Welcome to Hackathon Hacker:</label>
         <input id="name" name="name" type="text" placeholder="Enter your name" required />
         <button type="submit">Enter ICP World</button>
       </form>
-      <section id="greeting"></section>
+      
+    <section id="greeting"></section>
+    <a id="join-button" href="https://internetcomputer.org/" target="_blank">Join Internet Computer</a>
+    
     </main>
 
     <script type="module">
-      import { backend } from 'declarations/backend';
+      // Mock backend.greet for demo purposes
+      const backend = {
+        greet: async (name) => `Hello, ${name}! Welcome to the ICP world!`
+      };
 
       document.getElementById('greet-form').addEventListener('submit', async (e) => {
         e.preventDefault();
@@ -111,12 +167,18 @@
         greetingEl.innerText = greeting;
         greetingEl.style.display = 'block';
 
-        // Reset animation (if repeated submits)
+        document.getElementById('join-button').style.display = 'inline-block';
+        document.getElementById('join-button').style.animation = 'none';
+        document.getElementById('join-button').offsetHeight;
+        document.getElementById('join-button').style.animation = 'fadeInUp 0.6s ease-out forwards';
+
+
         greetingEl.style.animation = 'none';
-        greetingEl.offsetHeight; // trigger reflow
+        greetingEl.offsetHeight;
         greetingEl.style.animation = 'fadeInUp 0.6s ease-out forwards';
       });
     </script>
   </body>
 </html>
+
 
